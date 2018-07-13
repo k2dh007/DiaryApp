@@ -12,5 +12,7 @@ public class ContentActivity  extends AppCompatActivity {
         setContentView(R.layout.activity_content);
 
         Intent intent = new Intent(this.getIntent());
+
+
     }
 }
