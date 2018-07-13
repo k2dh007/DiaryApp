@@ -23,11 +23,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ImageView calender = (ImageView) findViewById(R.id.calender);
-        calender.setOnClickListener(new View.OnClickListener() {
+        ImageView calendar = (ImageView) findViewById(R.id.calendar);
+        calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CalenderActivity.class);
+                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
                 startActivity(intent);
             }
         });
