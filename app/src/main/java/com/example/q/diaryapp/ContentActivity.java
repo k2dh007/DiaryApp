@@ -1,8 +1,10 @@
 package com.example.q.diaryapp;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -40,20 +42,47 @@ public class ContentActivity  extends AppCompatActivity {
     private final int GALLERY_CODE = 1112;
     private final int CROP_CODE = 1113;
     private final int DELETE_CODE = 1114;
-    private Uri mImageCaptureUri;
-
+    private Uri mImageCaptureUri = null;
+    private boolean isCurrent = true;
+    private String year;
+    private String month;
+    private String mdate;
+    private String day;
+    public DBManager dbManager;
+    private EditText editText;
+    private SharedPreferences pref;
+    private ImageView iv;
+    //이거 두개 db에 넣을 것들
+    private String path = null;
+    private String text;
+    private String[] date= new String[4];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //DB: 시작할 때 data 조회해서 있으면 보여주고, 없으면 새로 만들기!
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content);
+        dbManager = new DBManager(this, "Diary.db", null, 1);
+        pref =getSharedPreferences("DIARY", Activity.MODE_PRIVATE);
+        iv = findViewById(R.id.imageView);
+        Intent intent = getIntent();
+        isCurrent = intent.getExtras().getBoolean("isCurrent");
+        year = intent.getExtras().getString("year");
+        month = intent.getExtras().getString("month");
+        mdate = intent.getExtras().getString("date");
+        day = intent.getExtras().getString("day");
 
-        Intent intent = new Intent(this.getIntent());
+        editText = findViewById(R.id.edit_text);
 
-        final EditText editText = findViewById(R.id.edit_text);
+        final String[] date= getDate();
 
-        String[] date = getDate();
+        if (dbManager.doesExist(year, month, mdate)){
+            editText.setText(dbManager.getContentResult(year, month, mdate));
+            String uri = dbManager.getUriResult(year,month,mdate);
+            if(!uri.equals("null")){
+                currentPhotoPath=uri;
+                getPictureForPhoto();
+            }
+        }
 
         TextView dateView = (TextView) findViewById(R.id.dateView);
 
@@ -116,15 +145,34 @@ public class ContentActivity  extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //DB: 여기서 날짜와 사진, text INSERT!!!
+                text = editText.getText().toString();
+                if(!dbManager.doesExist(year, month, mdate))
+                    dbManager.insert(year, month, mdate, day, text, path);
+                else dbManager.update(year, month, mdate, day, text, path);
+                Intent intent = new Intent(ContentActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
 
     public String[] getDate(){
+
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-E", Locale.KOREA);
         String str_date = df.format(new Date());
-
         String[] arr_date = str_date.split("-");
+        if(!isCurrent) {
+            arr_date[0] = year;
+            arr_date[1] = month;
+            arr_date[2] = mdate;
+            arr_date[3] = day; }
+            else{
+            year = arr_date[0];
+            month = arr_date[1];
+            mdate = arr_date[2];
+            day = arr_date[3];
+        }
+
         switch (arr_date[1]) {
             case "01":
                 arr_date[1] = "JANUARY";
@@ -252,7 +300,10 @@ public class ContentActivity  extends AppCompatActivity {
 
                 + mImageCaptureName);
         currentPhotoPath = storageDir.getAbsolutePath();
-
+        path = currentPhotoPath;
+        if(!dbManager.doesExist(year, month, mdate))
+            dbManager.insert(year, month, mdate, day, text, path);
+        else dbManager.update(year, month, mdate, day, text, path);
         return storageDir;
 
     }
@@ -274,15 +325,15 @@ public class ContentActivity  extends AppCompatActivity {
         } else {
             exifDegree = 0;
         }
-        ImageView iv = findViewById(R.id.imageView);
+
         iv.setVisibility(View.VISIBLE);
         final Bitmap rbitmap = rotate(bitmap, exifDegree);
         iv.setImageBitmap(rbitmap);
-        //ST: 흑백 on이면 아래 4줄 처리!
+        if(pref.getBoolean("useblack",false)){
         ColorMatrix matrix = new ColorMatrix();
         matrix.setSaturation(0);                        //0이면 grayscale
         ColorMatrixColorFilter cf = new ColorMatrixColorFilter(matrix);
-        iv.setColorFilter(cf);
+        iv.setColorFilter(cf);}
 
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -292,6 +343,10 @@ public class ContentActivity  extends AppCompatActivity {
                 intent.putExtra("return-data", true);
                 intent.putExtra("path", currentPhotoPath);
                 //DB: 여기에서 쓰던 text INSERT!(text만)
+                text = editText.getText().toString();
+                if(!dbManager.doesExist(year, month, mdate))
+                    dbManager.insert(year, month, mdate, day, text, path);
+                else dbManager.update(year, month, mdate, day, text, path);
                 startActivity(intent);
             }
         });
@@ -312,6 +367,18 @@ public class ContentActivity  extends AppCompatActivity {
                 case GALLERY_CODE:{
                     mImageCaptureUri = data.getData();
                     Intent intent = new Intent("com.android.camera.action.CROP");
+                    if(intent.resolveActivity(getPackageManager())!=null) {
+                        File photoFile = null;
+                        try {
+                            photoFile = createImageFile();
+                        } catch (IOException ex) {
+
+                        }
+                        if (photoFile != null) {
+                            photoUri = FileProvider.getUriForFile(this, getPackageName(), photoFile);
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                        }
+                    }
                     intent.setDataAndType(mImageCaptureUri, "image/*");
                     intent.putExtra("return-data", true);
                     startActivityForResult(intent, CROP_CODE);
@@ -330,10 +397,11 @@ public class ContentActivity  extends AppCompatActivity {
                         imageView.setImageBitmap(photo);
                         imageView.setVisibility(View.VISIBLE);
                         //ST: 흑백 on이면 아래 4줄 처리!
+                        if(pref.getBoolean("useblack",false)){
                         ColorMatrix matrix = new ColorMatrix();
                         matrix.setSaturation(0);                        //0이면 grayscale
                         ColorMatrixColorFilter cf = new ColorMatrixColorFilter(matrix);
-                        imageView.setColorFilter(cf);
+                        imageView.setColorFilter(cf);}
 
                         imageView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -343,6 +411,10 @@ public class ContentActivity  extends AppCompatActivity {
                                 intent.putExtra("return-data", true);
                                 intent.putExtra("uri", mImageCaptureUri);
                                 //DB: 여기에서 쓰던 text INSERT!!(text만)
+                                text = editText.getText().toString();
+                                if(!dbManager.doesExist(year, month, mdate))
+                                    dbManager.insert(year, month, mdate, day, text, path);
+                                else dbManager.update(year, month, mdate, day, text, path);
                                 startActivity(intent);
                             }
                         });

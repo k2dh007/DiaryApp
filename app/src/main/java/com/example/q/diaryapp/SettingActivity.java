@@ -19,7 +19,9 @@ public class SettingActivity  extends AppCompatActivity {
 
         setContentView(R.layout.activity_setting);
         Switch sw = (Switch) findViewById(R.id.switch1);
+        Switch sw2 = (Switch) findViewById(R.id.switch2);
         sw.setChecked(pref.getBoolean("usepsw",false));
+        sw2.setChecked(pref.getBoolean("useblack",false));
 
         sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -38,6 +40,15 @@ public class SettingActivity  extends AppCompatActivity {
                     editor.commit();
                 }
 
+            }
+        });
+        sw2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putBoolean("useblack", isChecked);
+                editor.commit();
             }
         });
     }
