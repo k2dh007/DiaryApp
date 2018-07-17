@@ -323,7 +323,6 @@ public class ContentActivity  extends AppCompatActivity {
                     case CROP_CODE:{
                     final Bundle extras = data.getExtras();
 
-
                     if(extras != null)
                     {
                         final Bitmap photo = extras.getParcelable("data");
