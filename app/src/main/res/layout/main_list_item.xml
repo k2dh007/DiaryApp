@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
+
+    <TextView
+        android:id="@+id/yoil"
+        android:layout_width="48dp"
+        android:layout_height="15dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="13dp"
+        android:background="@drawable/back2"
+        android:text="요일"
+        android:gravity="center_vertical"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="48dp"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/back"
+        android:text="날짜"
+        android:gravity="center"
+        android:textAlignment="center" />
+
+    <RelativeLayout
+        android:layout_width="273dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/yoil"
+        android:background="@drawable/back"
+        android:nextFocusLeft="@id/yoil"
+        android:orientation="vertical">
+
+        <TextView
+            android:gravity="center_vertical"
+            android:id="@+id/content"
+            android:layout_width="246dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="13dp"
+            android:text="내용" />
+
+    </RelativeLayout>
+</RelativeLayout>

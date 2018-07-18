@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
+
+    <TextView
+        android:id="@+id/min"
+        android:layout_width="27dp"
+        android:layout_height="16dp"
+        android:layout_alignEnd="@+id/yoil"
+        android:layout_below="@+id/date"
+        android:background="@drawable/back"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/hour"
+        android:layout_width="28dp"
+        android:layout_height="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/date"
+        android:background="@drawable/back"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/yoil"
+        android:layout_width="55dp"
+        android:layout_height="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="-170dp"
+        android:text="요일"
+        android:textAlignment="center"
+        android:background="@drawable/back2"/>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/back"
+        android:text="날짜"
+        android:textAlignment="center" />
+
+    <RelativeLayout
+        android:layout_width="290dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/back"
+        android:nextFocusLeft="@id/yoil"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="248dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:layout_marginStart="42dp"
+            android:text="내용" />
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="35dp"
+            android:layout_height="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="7dp"
+            app:srcCompat="@android:color/transparent" />
+    </RelativeLayout>
+
+</RelativeLayout>

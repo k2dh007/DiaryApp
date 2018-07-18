@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="110dp"
+        android:text="SCHEDULE CHECK"
+        android:textAlignment="center"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/planname"
+        android:layout_width="153dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_alignStart="@+id/hour"
+        android:layout_alignLeft="@+id/hour"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColorLink="@android:color/darker_gray"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="137dp" />
+
+    <EditText
+        android:id="@+id/hour"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="time"
+        android:textColorLink="@android:color/darker_gray"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="241dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="72dp"
+        android:layout_marginLeft="72dp"
+        android:text="일정 날짜"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView4"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:text="일정 이름"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView6"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:text="일정 시간"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView5"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:text="아이콘 선택" />
+
+    <TextView
+        android:id="@+id/addButton2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="45dp"
+        android:clickable="true"
+        android:text=" + "
+        android:textSize="30dp" />
+
+    <ImageView
+        android:id="@+id/iconList"
+        android:layout_width="54dp"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="135dp"
+        android:layout_toEndOf="@+id/hour"
+        android:layout_toRightOf="@+id/hour"
+        android:src="@drawable/icon" />
+
+    <EditText
+        android:id="@+id/month"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="number"
+        android:textColorLink="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_marginEnd="146dp"
+        android:layout_marginRight="146dp"
+        android:text="월" />
+
+    <EditText
+        android:id="@+id/day"
+        android:layout_width="47dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="77dp"
+        android:layout_marginRight="77dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textColorLink="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/month"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="62dp"
+        android:layout_marginRight="62dp"
+        android:text="일" />
+
+    <EditText
+        android:id="@+id/min"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/day"
+        android:layout_alignLeft="@+id/day"
+        android:layout_alignTop="@+id/hour"
+        android:ems="10"
+        android:inputType="time"
+        android:textColorLink="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView6"
+        android:layout_alignLeft="@+id/textView6"
+        android:layout_alignTop="@+id/textView4"
+        android:text="시" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/hour"
+        android:layout_alignEnd="@+id/planname"
+        android:layout_alignRight="@+id/planname"
+        android:text="분" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="15dp"
+        android:layout_height="23dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="190dp"
+        app:srcCompat="@drawable/pen" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="15dp"
+        android:layout_height="23dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_marginBottom="233dp"
+        app:srcCompat="@drawable/pen" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="15dp"
+        android:layout_height="23dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_marginBottom="159dp"
+        app:srcCompat="@drawable/pen" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="15dp"
+        android:layout_height="23dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_marginTop="256dp"
+        app:srcCompat="@drawable/pen" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="167dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/line" />
+
+</RelativeLayout>
