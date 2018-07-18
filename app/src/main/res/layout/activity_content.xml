@@ -7,20 +7,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/dateView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/pengeulc2"
         android:gravity="center"
         android:paddingTop="10dp"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
         android:id="@+id/textView2"
@@ -47,7 +61,7 @@
         android:layout_marginEnd="8dp"
         android:adjustViewBounds="true"
         android:gravity="center"
-        android:maxHeight="150dp"
+        android:maxHeight="200dp"
         android:scaleType="centerCrop"
         android:visibility="gone"
         android:paddingLeft="23dp"
@@ -59,12 +73,13 @@
     <EditText
         android:id="@+id/edit_text"
         android:layout_width="316dp"
-        android:layout_height="386dp"
+        android:layout_height="429dp"
         android:layout_marginBottom="300dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/transparent"
+        android:fontFamily="@font/pengeulc2"
         android:gravity="top"
         android:textColor="#666666"
         android:textCursorDrawable="@null"
@@ -105,7 +120,7 @@
         android:tint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/done"
-        app:layout_constraintHorizontal_bias="0.576"
+        app:layout_constraintHorizontal_bias="0.624"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
 
     <TextView
@@ -119,6 +134,7 @@
         android:clickable="true"
         android:text="| DONE |"
         android:textSize="17dp"
+        android:fontFamily="@font/pengeulc2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

@@ -41,6 +41,7 @@ public class ContentActivity  extends AppCompatActivity {
     private final int CROP_CODE = 1113;
     private final int DELETE_CODE = 1114;
     private Uri mImageCaptureUri;
+    String mCurrentPhotoPath;
 
 
     @Override
@@ -64,8 +65,6 @@ public class ContentActivity  extends AppCompatActivity {
         dateView.append(date[2]);
         dateView.append(" / ");
         dateView.append(date[0]);
-
-
 
         ImageView timeStamp = findViewById(R.id.timeStamp);
         timeStamp.setOnClickListener(new View.OnClickListener() {
@@ -312,6 +311,18 @@ public class ContentActivity  extends AppCompatActivity {
                 case GALLERY_CODE:{
                     mImageCaptureUri = data.getData();
                     Intent intent = new Intent("com.android.camera.action.CROP");
+                    if(intent.resolveActivity(getPackageManager())!=null) {
+                        File photoFile = null;
+                        try {
+                            photoFile = createImageFile();
+                        } catch (IOException ex) {
+
+                        }
+                        if (photoFile != null) {
+                            photoUri = FileProvider.getUriForFile(this, getPackageName(), photoFile);
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                        }
+                    }
                     intent.setDataAndType(mImageCaptureUri, "image/*");
                     intent.putExtra("return-data", true);
                     startActivityForResult(intent, CROP_CODE);
